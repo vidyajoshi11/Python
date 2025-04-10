@@ -1,0 +1,38 @@
+from itertools import permutations
+
+# Sample distance matrix (symmetric)
+# Cities: A, B, C, D
+# Matrix[i][j] = distance from city i to city j
+distance_matrix = [
+    [0, 10, 15, 20],   # A
+    [10, 0, 35, 25],   # B
+    [15, 35, 0, 30],   # C
+    [20, 25, 30, 0]    # D
+]
+
+def tsp_brute_force(matrix):
+    n = len(matrix)
+    cities = list(range(n))
+    min_path = None
+    min_cost = float('inf')
+
+    for perm in permutations(cities[1:]):  # Fix city 0 as start
+        path = [0] + list(perm) + [0]  # round trip
+        cost = 0
+        for i in range(len(path) - 1):
+            cost += matrix[path[i]][path[i + 1]]
+
+        if cost < min_cost:
+            min_cost = cost
+            min_path = path
+
+    return min_cost, min_path
+
+cost, path = tsp_brute_force(distance_matrix)
+
+# Mapping indices to city labels for display
+city_labels = ['A', 'B', 'C', 'D']
+path_labels = [city_labels[i] for i in path]
+
+print("Minimum cost:", cost)
+print("Best path:", " -> ".join(path_labels))
