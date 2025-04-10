@@ -1,0 +1,47 @@
+import heapq
+
+# Sample graph (adjacency list)
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+# Heuristic values (estimated cost to reach goal 'F')
+heuristics = {
+    'A': 3,
+    'B': 2,
+    'C': 1,
+    'D': 6,
+    'E': 1,
+    'F': 0
+}
+
+def best_first_search(start, goal):
+    visited = set()
+    priority_queue = []
+
+    # Push the start node with its heuristic value
+    heapq.heappush(priority_queue, (heuristics[start], start))
+
+    while priority_queue:
+        _, current = heapq.heappop(priority_queue)
+
+        print("Visiting:", current)
+        if current == goal:
+            print("Goal reached!")
+            return
+
+        visited.add(current)
+
+        for neighbor in graph[current]:
+            if neighbor not in visited:
+                heapq.heappush(priority_queue, (heuristics[neighbor], neighbor))
+
+    print("Goal not found.")
+
+# Run the search
+best_first_search('A', 'F')
