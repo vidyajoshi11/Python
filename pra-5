@@ -1,0 +1,23 @@
+def monkey_banana(triangle):
+    # Number of rows
+    n = len(triangle)
+
+    # Start from the second-last row and move upwards
+    for row in range(n - 2, -1, -1):
+        for col in range(len(triangle[row])):
+            # Choose the best path (left or right) from the row below
+            triangle[row][col] += max(triangle[row + 1][col], triangle[row + 1][col + 1])
+
+    # The top element contains the max bananas
+    return triangle[0][0]
+
+# Example banana triangle
+banana_triangle = [
+    [7],
+    [5, 8],
+    [0, 1, 4],
+    [2, 7, 4, 4]
+]
+
+result = monkey_banana(banana_triangle)
+print("Maximum bananas the monkey can collect:", result)
