@@ -1,0 +1,45 @@
+!pip install numpy
+!pip install pandas
+!pip install scikit-learn
+import numpy as np
+import pandas as pd
+!pip install matplotlib
+
+df=pd.read_csv("C:\\Users\\shree\\Downloads\\Boston.csv")
+df.head()
+df.columns
+df.info()
+df.drop('CHAS',axis=1,inplace=True)
+df.head()
+df.isnull().sum()
+
+zero_values = ( df == 0).sum()
+print(zero_values)
+
+df.drop('ZN',axis=1,inplace=True)
+df.head()
+
+y=df['MEDV']
+print(y)
+
+new_df=df.drop('MEDV',axis=1)
+new_df.head()
+print(new_df.isna().sum()) 
+
+import matplotlib.pyplot as plt
+for i in final_df.columns:
+  plt.bar(final_df[i],final_df['PRICES'],width=0.2,color='darkorange')
+  plt.xlabel(i)
+  plt.ylabel('house prices')
+  plt.show()
+
+for i in final_df.columns:
+  plt.scatter(final_df[i],final_df['PRICES'])
+  plt.xlabel(i)
+  plt.ylabel('house prices')
+  plt.show()
+
+
+
+
+
